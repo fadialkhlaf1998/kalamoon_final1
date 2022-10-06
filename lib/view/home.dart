@@ -36,7 +36,12 @@ class Home extends StatelessWidget {
                       _header(context),
                       _busImage(context),
                       _daySelectionMenu(context),
-                      loginController.studentDay[homeController.selectDay.value].meet.first.station.first.arrivalTime.isEmpty ? Text('empty') : Text(loginController.studentDay[homeController.selectDay.value].meet.first.station.first.arrivalTime.first.hour),
+                      /// todo
+                      loginController.studentDay[homeController.selectDay.value].meet.isNotEmpty
+                          ? loginController.studentDay[homeController.selectDay.value].meet.first.station.first.arrivalTime.isEmpty
+                          ? const Text('no arrivial time')
+                          : Text(loginController.studentDay[homeController.selectDay.value].meet.first.station.first.arrivalTime.first.hour)
+                          : const Text('no meeting') ,
                       // loginController.studentDay[homeController.selectDay.value].meet.first['station'].first['arrival_time'] != []
                       //     ? loginController.studentDay[homeController.selectDay.value].meet.first['begin_id'] != null
                       //     ? _expectedTimeText(context) : Text('') : Text(''),
@@ -122,7 +127,6 @@ class Home extends StatelessWidget {
                       /// todo
                       /// Get the date of this day
                      if(homeController.editMode.value == false){
-
                        homeController.selectDay.value = index;
                        homeController.selectDayId.value = introController.weekDayList[index].id;
                        homeController.newBeginHourValue.value = '';
@@ -244,7 +248,7 @@ class Home extends StatelessWidget {
                 ? Icon(Icons.keyboard_arrow_down, size: 30)
                 :  Icon(Icons.edit_location_alt_outlined, size: 20),
             onTapIcon: (){
-              homeController.goToSelectMode(context, 'station', 'selection2', introController.stationsList);
+              // homeController.goToSelectMode(context, 'station', 'selection2', introController.stationsList);
             },
           ),
         ],

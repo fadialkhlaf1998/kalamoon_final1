@@ -47,7 +47,7 @@ class User {
     email: json["email"],
     name: json["name"],
     isActive: json["is_active"],
-    macId: json["mac_id"],
+    macId: json["mac_id"] ?? '',
     rule: json["rule"],
     days: json['days'] != null ? List<Day>.from(json["days"].map((x) => Day.fromMap(x))) : <Day>[],
     token: json["token"],

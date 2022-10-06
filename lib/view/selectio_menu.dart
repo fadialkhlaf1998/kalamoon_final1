@@ -117,11 +117,11 @@ class SelectionMenu extends StatelessWidget {
               // ),
               const SizedBox(height: 10),
               data[1] == 'selection2'
-                  ? Text('')
+                  ? const Text('')
                   : CustomButton(
                   width: 90,
                   height: 7,
-                  text: App_Localization.of(context).translate('cancel_appointment'),
+                  text: data[1] == "selection1" ?  App_Localization.of(context).translate('cancel_appointment') :  App_Localization.of(context).translate('cancel_appointment2'),
                   onPressed: (){
                     if(data[1] == 'selection1'){
                       homeController.newBeginHourValue.value = App_Localization.of(context).translate('cancel_appointment');

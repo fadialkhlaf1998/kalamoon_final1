@@ -18,7 +18,7 @@ class HomeController extends GetxController{
   IntroController introController = Get.find();
 
   RxInt selectDay = 0.obs;
-  RxInt selectDayId = 1.obs;  //introController.weekDayList.first.id.obs;
+  RxInt selectDayId = 1.obs;
   ItemScrollController itemScrollController = ItemScrollController();
   RxBool editMode = false.obs;
   RxInt selectIndexForEndHour = (-1).obs;
@@ -42,7 +42,19 @@ class HomeController extends GetxController{
   @override
   void onInit() {
     super.onInit();
-  } // Future scrollToItem(index) async{
+    Future.delayed(Duration(milliseconds: 500)).then((value){
+      if(loginController.studentDay[0].meet.isEmpty){
+        /// todo
+        /// remove comment
+      //  Get.toNamed('/selectionMenu',arguments: ['الموقف المعتمد', 'selection2', introController.stationsList]);
+      }else{
+
+      }
+    });
+
+
+  }
+  // Future scrollToItem(index) async{
   //   itemScrollController.scrollTo(
   //       index: index,
   //       alignment: index == 0 ? 0 : index == daysList.length - 1 ? 0.5 : 0.4,

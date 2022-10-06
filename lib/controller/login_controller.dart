@@ -22,7 +22,7 @@ class LoginController extends GetxController{
 
   // Future login
 
-  Future login(BuildContext context) async{
+  Future login(BuildContext context) async {
     if(studentId.text.isEmpty){
       Get.snackbar(
           App_Localization.of(context).translate('warning'),
@@ -57,8 +57,6 @@ class LoginController extends GetxController{
                 if(value.isActive == 1){
                   loginUserOperation(value, context);
                 }else{
-                  /// todo
-                  /// go to not active page
                   loading.value = false;
                   Get.to(NotActivatePage());
                 }
