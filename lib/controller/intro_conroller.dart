@@ -41,11 +41,11 @@ class IntroController extends GetxController{
       if(value){
         Api.getStartUpData().then((value){
           if(value.weekDays.isNotEmpty){
-            weekDayList.addAll(value.weekDays);
-            stationsList.addAll(value.stations);
-            beginHourList.addAll(value.beginHour);
-            endHourList.addAll(value.endHour);
-            universityList.addAll(value.university);
+            weekDayList.value=value.weekDays;
+            stationsList.value=value.stations;
+            beginHourList.value=value.beginHour;
+            endHourList.value=value.endHour;
+            universityList.value=value.university;
             checkLogin();
           }else{
             //todo reGetData

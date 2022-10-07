@@ -26,7 +26,7 @@ class SettingsController extends GetxController{
 
   fillLanguageIndex(){
     if(Global.langCode == 'ar'){
-      languageChooseIndex.value == 1;
+      languageChooseIndex.value = 1;
     }
   }
 

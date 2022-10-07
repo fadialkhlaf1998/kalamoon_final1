@@ -21,7 +21,9 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Obx((){
+
       return Scaffold(
         body: SafeArea(
             child: Stack(
@@ -152,6 +154,7 @@ class Settings extends StatelessWidget {
             itemCount: settingsController.languageList.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index){
+              print(settingsController.languageChooseIndex.value);
               return GestureDetector(
                 onTap: (){
                   settingsController.changeLanguageFromMenu(index, context);
