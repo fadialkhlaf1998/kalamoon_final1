@@ -31,6 +31,7 @@ class Settings extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      SizedBox(height: 10,),
                       _title(context),
                       _menu(context),
                       const SizedBox(height: 40),
