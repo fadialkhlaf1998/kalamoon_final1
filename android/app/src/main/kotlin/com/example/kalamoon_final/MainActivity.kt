@@ -1,4 +1,4 @@
-package com.example.kalamoon_final
+package com.fadi.kalamoon
 
 import io.flutter.embedding.android.FlutterActivity
 
