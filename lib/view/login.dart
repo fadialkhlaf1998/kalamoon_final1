@@ -103,8 +103,8 @@ class Login extends StatelessWidget {
               loginController.visiblePassword.value = !loginController.visiblePassword.value;
             },
             child: loginController.visiblePassword.value
-                ?  Icon(Icons.visibility_outlined, color: Colors.white)
-                :  Icon(Icons.visibility_off_outlined, color: Colors.white),
+                ?  Icon(Icons.visibility_off_outlined, color: Colors.white)
+                :  Icon(Icons.visibility_outlined, color: Colors.white),
           ),
           labelText: App_Localization.of(context).translate('password'),
           hintText: App_Localization.of(context).translate('enter_password'),

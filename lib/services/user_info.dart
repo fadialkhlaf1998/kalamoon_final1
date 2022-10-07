@@ -31,7 +31,7 @@ class UserInfo {
 
   }
 
-  static loadUserInformation() async {
+  static Future<bool> loadUserInformation() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     studentId = prefs.getString('studentId') ?? '-1';
     phone = prefs.getString('phone') ?? '-1';
@@ -40,6 +40,7 @@ class UserInfo {
     name = prefs.getString('name') ?? "";
     token = prefs.getString('token') ?? "";
     id = prefs.getString('id') ?? "-1";
+    return true;
   }
 
   static clear() async {

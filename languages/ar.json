@@ -75,6 +75,12 @@
   "change_password_successfully" : "تم تغيير كلمة المرور بنجاح",
   "change_password_question" : "هل تريد حقاً تغيير كلمة المرور؟",
   "successfully_registered" : "تم تسجيل الحضور بنجاح",
-  "you_should_choose_station" : "يجب اختيار موقف"
+  "you_should_choose_station" : "يجب اختيار موقف",
+
+  "please_be_in": " الرجاء التواجد في الموقف المعتمد عند الساعة ",
+  "oops_wrong_happen": "عفواً حدث خطأ",
+  "please_save_changes_first": "الرجاء حفظ التغييرات أولاً",
+  "no_internet_msg": "لا يوخد أنترنت",
+  "no_internet_msg_desc": "الرجاء الاتصال بالأنترنت"
 
 }

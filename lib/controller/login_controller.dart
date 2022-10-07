@@ -60,11 +60,14 @@ class LoginController extends GetxController{
                   loading.value = false;
                   Get.to(NotActivatePage());
                 }
-              }else if(value.rule == 'sub-admin'){
-                Global.adminId = value.id.toString();
-                subAdminOperation(context);
-
               }
+            }else if(Global.adminRule == 'sub-admin'){
+              // Global.adminId = value.id.toString();
+              // Global.adminToken = value.token.toString();
+              print('-----------Here Admin Token---------');
+              print(Global.adminToken);
+              print(Global.adminId);
+              subAdminOperation(context);
             }else{
               /// todo
               /// No user with this information

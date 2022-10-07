@@ -46,7 +46,7 @@ class HomeController extends GetxController{
       if(loginController.studentDay[0].meet.isEmpty){
         /// todo
         /// remove comment
-      //  Get.toNamed('/selectionMenu',arguments: ['الموقف المعتمد', 'selection2', introController.stationsList]);
+        //Get.toNamed('/selectionMenu',arguments: ['الموقف المعتمد', 'selection2', introController.stationsList]);
       }else{
 
       }

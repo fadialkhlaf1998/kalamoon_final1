@@ -10,6 +10,8 @@ class Global {
 
   static String langCode = "en";
   static String adminId = '-1';
+  static String adminRule = '-1';
+  static String adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoxMTcsImlhdCI6MTY2NDQ0MDQ1Mn0.0emItqYk4uHRmTzBtjKTlSzTYbLHYDk4DHePZ0h_6Qk';
 
   static saveLanguage(BuildContext context , String lang){
     SharedPreferences.getInstance().then((prefs){
@@ -24,11 +26,14 @@ class Global {
     try{
       SharedPreferences prefs= await SharedPreferences.getInstance();
       String lang = prefs.getString("language")??'def';
+      print('Language: '+lang);
       if(lang!="def"){
         langCode = lang;
       }else{
-        langCode="en";
+        langCode="ar";
+        //todo arabic default
       }
+      print('Language: '+langCode);
       Get.updateLocale(Locale(langCode));
       return langCode;
     }catch(e){

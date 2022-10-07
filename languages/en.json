@@ -75,9 +75,14 @@
   "change_password_successfully" : "Password changed successfully",
   "change_password_question" : "Do you really want to change the password?",
   "successfully_registered" : "Successfully registered",
-  "you_should_choose_station" : "you should choose station"
+  "you_should_choose_station" : "you should choose station",
 
 
 
+  "please_be_in": "Please be in station at ",
+  "oops_wrong_happen": "Oops wrong happen",
+  "please_save_changes_first": "Please save changes first",
+  "no_internet_msg": "No internet connection",
+  "no_internet_msg_desc": "Please connect to internet"
 
 }

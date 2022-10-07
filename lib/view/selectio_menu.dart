@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kalamoon_final/controller/intro_conroller.dart';
+import 'package:kalamoon_final/view/intro.dart';
 import '../controller/home_controller.dart';
 import '../app_localization.dart';
 import '../services/app_style.dart';
@@ -69,7 +71,10 @@ class SelectionMenu extends StatelessWidget {
                         Get.back();
                       }
                     }else if(data[1] == 'selection2'){
-                        Get.back();
+                        
+                        IntroController introController = Get.find();
+                        introController.reInit(introController.stationsList[ homeController.selectIndexForStation.value].id);
+                        Get.offAll(Intro());
                     }
                   },
                   color: AppStyle.lightRed,
@@ -129,7 +134,7 @@ class SelectionMenu extends StatelessWidget {
                       homeController.cancelBeginHour.value = true;
                       Get.back();
                     }else if(data[1] == 'selection'){
-                     homeController.newEndHourValue.value = App_Localization.of(context).translate('cancel_appointment');
+                     homeController.newEndHourValue.value = App_Localization.of(context).translate('cancel_appointment2');
                      homeController.selectIndexForEndHour.value = -1;
                      homeController.cancelEndHour.value = true;
                         Get.back();
@@ -177,6 +182,7 @@ class SelectionMenu extends StatelessWidget {
                     selectionMenuController.selectIndex.value = index;
                     homeController.selectIndexForStation.value = index;
                     homeController.newStationValue.value = data[2][index].title;
+                    print('*********');
                     },
                   child: Stack(
                     alignment: Alignment.center,

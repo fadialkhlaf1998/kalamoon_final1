@@ -18,6 +18,20 @@ class Home extends StatelessWidget {
   HomeController homeController = Get.find();
   IntroController introController = Get.find();
   LoginController loginController = Get.find();
+  Home(){
+    if(loginController.studentDay[0].meet.isEmpty){
+      // homeController.goToSelectMode(context, 'station', 'selection2', introController.stationsList);
+      Future.delayed(Duration(milliseconds: 200)).then((value) {
+        if(Global.langCode == "en"){
+          Get.toNamed('/selectionMenu',arguments: ['station', 'selection2', introController.stationsList]);
+        }else{
+          Get.toNamed('/selectionMenu',arguments: ['الموقف المعتمد', 'selection2', introController.stationsList]);
+        }
+
+      });
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +53,9 @@ class Home extends StatelessWidget {
                       /// todo
                       loginController.studentDay[homeController.selectDay.value].meet.isNotEmpty
                           ? loginController.studentDay[homeController.selectDay.value].meet.first.station.first.arrivalTime.isEmpty
-                          ? const Text('no arrivial time')
-                          : Text(loginController.studentDay[homeController.selectDay.value].meet.first.station.first.arrivalTime.first.hour)
-                          : const Text('no meeting') ,
+                          ? const Text('')
+                          : Text(App_Localization.of(context).translate("please_be_in")+loginController.studentDay[homeController.selectDay.value].meet.first.station.first.arrivalTime.first.hour,style: TextStyle(fontSize: 11),)
+                          : const Text('') ,
                       // loginController.studentDay[homeController.selectDay.value].meet.first['station'].first['arrival_time'] != []
                       //     ? loginController.studentDay[homeController.selectDay.value].meet.first['begin_id'] != null
                       //     ? _expectedTimeText(context) : Text('') : Text(''),
@@ -132,6 +146,13 @@ class Home extends StatelessWidget {
                        homeController.newBeginHourValue.value = '';
                        homeController.newEndHourValue.value = '';
                        homeController.newStationValue.value = '';
+                     }else{
+                       Get.snackbar(
+                           App_Localization.of(context).translate("oops_wrong_happen"),
+                           App_Localization.of(context).translate("please_save_changes_first"),
+                           margin: const EdgeInsets.only(top: 20,left: 25,right: 25),
+                           backgroundColor: AppStyle.red,
+                           icon: const Icon(Icons.warning));
                      }
                       // if(Global.langCode == 'en'){
                       //   await homeController.scrollToItem(index);
@@ -230,6 +251,7 @@ class Home extends StatelessWidget {
                         ? Icon(Icons.keyboard_arrow_down, size: 30)
                         :  Icon(Icons.edit_calendar_outlined, size: 20),
             onTapIcon: (){
+              // print(introController.endHourList.last.hour);
               homeController.goToSelectMode(context, 'from_university', 'selection', introController.endHourList);
             },
           ),
@@ -244,9 +266,7 @@ class Home extends StatelessWidget {
                 ? App_Localization.of(context).translate('station') + ' ' + '(${loginController.studentDay[homeController.selectDay.value].meet.first.station.first.title})'
                 : App_Localization.of(context).translate('station'),
             newTimetext: homeController.newStationValue.value,
-            suffixIcon: homeController.editMode.value
-                ? Icon(Icons.keyboard_arrow_down, size: 30)
-                :  Icon(Icons.edit_location_alt_outlined, size: 20),
+            suffixIcon: Icon(Icons.edit_location_alt_outlined, size: 20),
             onTapIcon: (){
               // homeController.goToSelectMode(context, 'station', 'selection2', introController.stationsList);
             },

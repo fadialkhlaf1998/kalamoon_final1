@@ -61,19 +61,23 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState(){
     Store.loadTheme().then((value) {
-      MyTheme.isDarkTheme.value = value;
+     setState(() {
+       MyTheme.isDarkTheme.value = value;
+     });
     });
 
     // set_locale(Locale('ar'));
-    Get.updateLocale(Locale('ar'));
-    setState(() {
-      _locale = Locale('ar');
-    });
-    // Global.loadLanguage().then((language) {
-    //   setState(() {
-    //     _locale= Locale(language);
-    //   });
+
+    // setState(() {
+    //   _locale = Locale('ar');
     // });
+    Global.loadLanguage().then((language) {
+      setState(() {
+        print('new Lang'+language);
+        _locale= Locale(language);
+        // Get.updateLocale(Locale(language));
+      });
+    });
     super.initState();
   }
 
@@ -125,7 +129,7 @@ class _MyAppState extends State<MyApp> {
           ),
           GetPage(
             name: '/noInternet',
-            page: ()=> NoInternetPage(),
+            page: ()=> NoInternetPage(-1),
             transition: Transition.fadeIn,transitionDuration: const Duration(milliseconds: 400), curve: Curves.fastOutSlowIn,
           ),
         ],
@@ -134,7 +138,7 @@ class _MyAppState extends State<MyApp> {
         theme: MyTheme.lightTheme,
         darkTheme: MyTheme.darkTheme,
         locale: _locale,
-        supportedLocales: [ Locale('ar', '')],
+        supportedLocales: [ Locale('ar', ''),Locale('en', '')],
         localizationsDelegates: const [
           App_Localization.delegate,
           GlobalMaterialLocalizations.delegate,

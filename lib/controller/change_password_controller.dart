@@ -49,7 +49,7 @@ class ChangePasswordController extends GetxController{
           });
         }else{
           Future.delayed(const Duration(milliseconds: 500)).then((value){
-            Get.to(()=>NoInternetPage());
+            Get.to(()=>NoInternetPage(-1));
           });
           loading.value = false;
         }

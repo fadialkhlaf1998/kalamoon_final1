@@ -26,8 +26,18 @@ class IntroController extends GetxController{
     // checkLogin();
   }
 
+  reInit(int station_id)async{
+    print(loginController.studentDay[0].meet.length.toString()+":***");
+    if(loginController.studentDay[0].meet.length > 0){
+      await Api.editAllMeet(station_id.toString(), UserInfo.id.toString());
+    }else{
+      await Api.addAllMeet(station_id.toString(), UserInfo.id.toString());
+    }
+    getData();
+  }
+
   getData() async {
-    Api.checkInternet().then((value){
+    Api.checkInternet().then((value)async{
       if(value){
         Api.getStartUpData().then((value){
           if(value.weekDays.isNotEmpty){
@@ -38,14 +48,25 @@ class IntroController extends GetxController{
             universityList.addAll(value.university);
             checkLogin();
           }else{
+            //todo reGetData
+            getData();
             print('no data');
           }
+        }).catchError((err){
+          print(err);
         });
       }else{
         print('no internet');
+        await UserInfo.loadUserInformation();
+        int id = -1;
+        try{
+         id = int.parse(UserInfo.id);
+        }catch(err){
 
+        }
+        print(id.toString() +"****************------*******");
         Future.delayed(const Duration(milliseconds: 500)).then((value){
-          Get.to(()=>NoInternetPage())!.then((value) {
+          Get.to(()=>NoInternetPage(id))!.then((value) {
             getData();
           });
         });

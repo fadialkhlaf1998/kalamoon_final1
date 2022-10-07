@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:kalamoon_final/services/store.dart';
 import '../model/start_up_data.dart';
 import '../services/global.dart';
 import '../services/user_info.dart';
@@ -54,10 +56,20 @@ class Api{
 
     if (response.statusCode == 200) {
       var data = await response.stream.bytesToString();
-      return User.fromMap(jsonDecode(data));
+      log(data);
+      try{
+        return User.fromMap(jsonDecode(data));
+      }catch(err){
+        Global.adminToken = jsonDecode(data)['token'];
+        Global.adminId = jsonDecode(data)['id'].toString();
+        Global.adminRule = jsonDecode(data)['rule'];
+        return User(id: -1, studentId: '-1', phone: '-1', universityId: -1, password: '', email: '', rule: '', days: [], isActive: -1 , name: '', token: '', macId: '');
+      }
+
     }
     else {
       print(response.reasonPhrase);
+      UserInfo.clear();
       return User(id: -1, studentId: '-1', phone: '-1', universityId: -1, password: '', email: '', rule: '', days: [], isActive: -1 , name: '', token: '', macId: '');
     }
   }
@@ -88,9 +100,16 @@ class Api{
 
     if (response.statusCode == 200) {
       var data = await response.stream.bytesToString();
-      return User.fromMap(jsonDecode(data));
+      log(data);
+
+      User u = User.fromMap(jsonDecode(data));
+      await UserInfo.saveUserInformation(u.studentId, u.phone, u.email, u.password, u.name,u.token, u.id.toString());
+      await UserInfo.loadUserInformation();
+
+      return u;
     }
     else {
+      UserInfo.clear();
       return User(id: -1, studentId: '-1', phone: '-1', universityId: -1, password: '', email: '', rule: '', days: [], isActive: -1 , name: '', token: '',macId: '');
     }
 
@@ -99,11 +118,12 @@ class Api{
   static Future<StartUpData> getStartUpData() async {
 
     var request = http.Request('GET', Uri.parse(url + 'start-up'));
-
+    print('start');
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
       var jsonData = await response.stream.bytesToString();
+      print(jsonData);
       return StartUpData.fromMap(jsonDecode(jsonData));
       // var list = jsonDecode(jsonData) as List;
       // List<StartUpData> data = <StartUpData>[];
@@ -129,6 +149,53 @@ class Api{
       "end_id": endId,
       "station_id": stationId,
       "week_days_id": weekDaysId,
+      "student_id": studentId
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      return true;
+    }
+    else {
+      print(response.reasonPhrase);
+      return false;
+    }
+  }
+
+  static Future addAllMeet( String? stationId, String studentId) async {
+    var headers = {
+      'Authorization': 'Bearer ${UserInfo.token}',
+      'Content-Type': 'application/json',
+    };
+    var request = http.Request('POST', Uri.parse(url + 'meet/add-all'));
+    request.body = json.encode({
+      "station_id": stationId,
+      "student_id": studentId
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      return true;
+    }
+    else {
+      print(response.reasonPhrase);
+      return false;
+    }
+  }
+  static Future editAllMeet( String? stationId, String studentId) async {
+    var headers = {
+      'Authorization': 'Bearer ${UserInfo.token}',
+      'Content-Type': 'application/json',
+    };
+    var request = http.Request('PUT', Uri.parse(url + 'meet/edit-all'));
+    request.body = json.encode({
+      "station_id": stationId,
       "student_id": studentId
     });
     request.headers.addAll(headers);
@@ -222,7 +289,7 @@ class Api{
 
   static Future checkIn(String studentId) async {
     var headers = {
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoxMTcsImlhdCI6MTY2NDQ0MDQ1Mn0.0emItqYk4uHRmTzBtjKTlSzTYbLHYDk4DHePZ0h_6Qk',
+      'Authorization': 'Bearer '+Global.adminToken,
       'Content-Type': 'application/json'
     };
     var request = http.Request('POST', Uri.parse(url + 'meet/check-in'));

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:kalamoon_final/controller/home_controller.dart';
+import 'package:kalamoon_final/controller/intro_conroller.dart';
+import 'package:kalamoon_final/view/home.dart';
+import 'package:kalamoon_final/view/intro.dart';
 import '../widget/confirm_dialog.dart';
 import '../app_localization.dart';
 import '../services/app_style.dart';
@@ -96,13 +100,14 @@ class Settings extends StatelessWidget {
   _menu(context){
     return Container(
       width: AppStyle.getDeviceWidth(90, context),
-      height: AppStyle.getDeviceHeight(50, context),
+      height: AppStyle.getDeviceHeight(70, context),
       // color: Colors.red,
       child: Column(
         children: [
-          // _language(context),
+          _language(context),
           _changePassword(context),
           _darkMode(context),
+          _station(context),
           _logOut(context)
         ],
       )
@@ -272,6 +277,30 @@ class Settings extends StatelessWidget {
         ),
       );
     });
+  }
+
+  _station(context){
+    return GestureDetector(
+      onTap: (){
+        // print('-------------');
+        IntroController introController = Get.find();
+        Get.toNamed('/selectionMenu',arguments: ['الموقف المعتمد', 'selection2', introController.stationsList]);
+      },
+      child: Container(
+        color: Colors.transparent,
+        height: AppStyle.getDeviceHeight(heightItem, context),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              App_Localization.of(context).translate('station'),
+              style:CommonTextStyle.settingsTextStyle1(context),
+            ),
+            Icon(Icons.edit_location_alt_outlined,color: Theme.of(context).dividerColor)
+          ],
+        ),
+      ),
+    );
   }
 
   _logOut(context){

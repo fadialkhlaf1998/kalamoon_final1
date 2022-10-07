@@ -223,6 +223,13 @@ class _QRViewExampleState extends State<QRViewExample> {
             });
           }else{
             print('no internet');
+            Get.snackbar(
+                App_Localization.of(context).translate('no_internet_msg'),
+                App_Localization.of(context).translate('no_internet_msg_desc'),
+          margin: const EdgeInsets.only(top: 20,left: 25,right: 25),
+          backgroundColor: AppStyle.red,
+          icon: const Icon(Icons.warning));
+
           }
         });
         result = scanData;
