@@ -15,8 +15,20 @@
     </array>
     <key>io.flutter.embedded_views_preview</key>
     <true/>
-    <key>NSCameraUsageDescription</key>
-    <string>This app needs camera access to scan QR codes</string>
+
+    <key>NSPhotoLibraryUsageDescription</key>
+        <string>The reason why we need to access the photo library is to get a photo and upload as Profile Picture.</string>
+        <key>NSMicrophoneUsageDescription</key>
+        <string>This app does not require access to the microphone.</string>
+        <key>NSCameraUsageDescription</key>
+        <string>This app needs camera access to scan QR codes</string>
+        <key>NSLocationAlwaysUsageDescription</key>
+        <string>Program requires GPS to track cars and job orders</string>
+        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        <string>Program requires GPS to track cars and job orders</string>
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>Program requires GPS to track cars and job orders</string>
+
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
