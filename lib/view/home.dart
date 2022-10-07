@@ -19,13 +19,24 @@ class Home extends StatelessWidget {
   IntroController introController = Get.find();
   LoginController loginController = Get.find();
   Home(){
+    checkStation();
+  }
+  checkStation(){
     if(loginController.studentDay[0].meet.isEmpty){
       // homeController.goToSelectMode(context, 'station', 'selection2', introController.stationsList);
       Future.delayed(Duration(milliseconds: 200)).then((value) {
         if(Global.langCode == "en"){
-          Get.toNamed('/selectionMenu',arguments: ['station', 'selection2', introController.stationsList]);
+          Get.toNamed('/selectionMenu',arguments: ['station', 'selection2', introController.stationsList])!.then((value) {
+            if(loginController.studentDay[0].meet.isEmpty){
+              checkStation();
+            }
+          });
         }else{
-          Get.toNamed('/selectionMenu',arguments: ['الموقف المعتمد', 'selection2', introController.stationsList]);
+          Get.toNamed('/selectionMenu',arguments: ['الموقف المعتمد', 'selection2', introController.stationsList])!.then((value) {
+            if(loginController.studentDay[0].meet.isEmpty){
+              checkStation();
+            }
+          });
         }
 
       });
