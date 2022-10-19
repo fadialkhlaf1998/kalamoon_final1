@@ -116,7 +116,7 @@ class Welcome extends StatelessWidget {
               height: 7,
               text: App_Localization.of(context).translate('sign_in'),
               onPressed: (){
-                Get.offNamed('/login');
+                Get.toNamed('/login');
               },
               color: AppStyle.lightRed,
               color2: AppStyle.darkRed,
