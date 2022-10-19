@@ -23,7 +23,7 @@ class Login extends StatelessWidget {
         body: Stack(
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage('assets/images/new_background.jpg')
@@ -43,9 +43,9 @@ class Login extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Hero(
+                    const Hero(
                       tag: 'introLogo',
-                        child: const LogoContainer(width: 40, height: 30)),
+                        child: LogoContainer(width: 40, height: 20)),
                     _inputField(context),
                     _signInOption(context),
                   ],

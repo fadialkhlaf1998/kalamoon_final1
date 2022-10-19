@@ -19,7 +19,7 @@ class LogoContainer extends StatelessWidget {
       height: AppStyle.getDeviceHeight(height, context),
       decoration: const BoxDecoration(
         image: DecorationImage(
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
           image: AssetImage('assets/icons/logo.png')
         )
       ),

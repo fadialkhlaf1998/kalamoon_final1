@@ -73,7 +73,7 @@ class Welcome extends StatelessWidget {
     return const Hero(
       tag: 'introLogo',
       child: LogoContainer(
-        height: 30,
+        height: 20,
         width: 50,
       ),
     );
