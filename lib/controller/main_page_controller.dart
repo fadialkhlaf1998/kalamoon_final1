@@ -29,7 +29,7 @@ class MainPageController extends GetxController{
               msg: message,
               fontSize: 15,
             backgroundColor: Theme.of(context).dividerColor,
-            textColor: MyTheme.isDarkTheme.value ? AppStyle.red : Colors.white
+            textColor: MyTheme.isDarkTheme.value ? AppStyle.red : Colors.white,
           );
           return false;
         }else{

@@ -291,7 +291,7 @@ class Settings extends StatelessWidget {
         duration: const Duration(milliseconds: 1000),
         height: AppStyle.getDeviceHeight(heightItem, context),
        decoration: BoxDecoration(
-         color: settingsController.stationLight.value ? Colors.red.withOpacity(0.7) : Colors.transparent,
+         color: settingsController.stationLight.value ? Colors.red.withOpacity(0.5) : Colors.transparent,
          borderRadius: BorderRadius.circular(20),
        ),
         child: Row(

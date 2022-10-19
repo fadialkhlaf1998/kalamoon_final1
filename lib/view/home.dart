@@ -278,11 +278,10 @@ class Home extends StatelessWidget {
             newTimetext: homeController.newStationValue.value,
             suffixIcon: const Icon(Icons.edit_location_alt_outlined, size: 20),
             onTapIcon: (){
-              // homeController.goToSelectMode(context, 'station', 'selection2', introController.stationsList);
               mainPageController.selectedIndex.value = 3;
               mainPageController.pageController.animateToPage(3, duration: const Duration(milliseconds: 700), curve: Curves.fastOutSlowIn);
               settingsController.stationLight.value = true;
-              Future.delayed(const Duration(milliseconds: 3000)).then((value){
+              Future.delayed(const Duration(milliseconds: 1500)).then((value){
                 settingsController.stationLight.value = false;
               });
               AppStyle.noteNotification(context, 'note', 'change_station');

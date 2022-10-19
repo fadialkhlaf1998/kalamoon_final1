@@ -21,7 +21,11 @@ class MainPage extends StatelessWidget {
     return Obx((){
       return WillPopScope(
         onWillPop: () async {
-          return mainPageController.backButton(context, homeController);
+          if(homeController.editMode.value){
+            return AppStyle.errorNotification(context, 'oops_wrong_happen', 'please_save_changes_first');
+          }else{
+            return mainPageController.backButton(context, homeController);
+          }
         },
         child: Scaffold(
           bottomNavigationBar: BottomNavyBar(
@@ -31,7 +35,7 @@ class MainPage extends StatelessWidget {
             showElevation: true,
             onItemSelected: (index) {
               if(homeController.editMode.value){
-                AppStyle.errorNotification(context, "oops_wrong_happen", "oops_wrong_happen");
+                AppStyle.errorNotification(context, 'oops_wrong_happen', 'please_save_changes_first');
               }else{
                 mainPageController.selectedIndex.value = index;
                 mainPageController.pageController.animateToPage(index, duration: const Duration(milliseconds: 700), curve: Curves.fastOutSlowIn);
@@ -91,7 +95,7 @@ class MainPage extends StatelessWidget {
                   title: Text(
                     App_Localization.of(context).translate('services'),
                     style: const TextStyle(
-                        fontFamily: 'Muli',
+                        fontFamily: 'Khebrat',
                         color: Colors.white
                     ),
                   ),
