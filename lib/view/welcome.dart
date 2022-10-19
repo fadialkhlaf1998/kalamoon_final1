@@ -74,7 +74,7 @@ class Welcome extends StatelessWidget {
       tag: 'introLogo',
       child: LogoContainer(
         height: 20,
-        width: 50,
+        width: 42,
       ),
     );
   }
