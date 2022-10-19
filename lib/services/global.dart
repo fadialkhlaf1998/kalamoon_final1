@@ -1,3 +1,4 @@
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,11 @@ class Global {
       if(lang!="def"){
         langCode = lang;
       }else{
-        langCode="ar";
+        if(Platform.isAndroid){
+          langCode="ar";
+        }else{
+          langCode="en";
+        }
       }
       print('Language: '+langCode);
       Get.updateLocale(Locale(langCode));
