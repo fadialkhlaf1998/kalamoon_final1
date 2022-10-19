@@ -135,7 +135,11 @@ class Home extends StatelessWidget {
           Text(
             App_Localization.of(context).translate('university_id') + ' ' + UserInfo.studentId,
             style: CommonTextStyle.defaultTextStyle(context),
-          )
+          ),
+          Text(
+            App_Localization.of(context).translate('id_number') + ' ' + UserInfo.nationalId,
+            style: CommonTextStyle.defaultTextStyle(context),
+          ),
         ],
       )
     );

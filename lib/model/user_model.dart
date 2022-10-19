@@ -2,7 +2,6 @@
 //
 //     final user = userFromMap(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 User userFromMap(String str) => User.fromMap(json.decode(str));
@@ -13,6 +12,7 @@ class User {
   User({
     required this.id,
     required this.studentId,
+    required this.nationalId,
     required this.phone,
     required this.universityId,
     required this.password,
@@ -27,6 +27,7 @@ class User {
 
   int id;
   String studentId;
+  String nationalId;
   String phone;
   int universityId;
   String password;
@@ -41,6 +42,7 @@ class User {
   factory User.fromMap(Map<String, dynamic> json) => User(
     id: json["id"],
     studentId: json["student_id"],
+    nationalId: json["national_id"] ?? "-",
     phone: json["phone"],
     universityId: json["university_id"],
     password: json["password"],
@@ -56,6 +58,7 @@ class User {
   Map<String, dynamic> toMap() => {
     "id": id,
     "student_id": studentId,
+    "national_id": nationalId,
     "phone": phone,
     "university_id": universityId,
     "password": password,

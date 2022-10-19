@@ -96,7 +96,8 @@
   "exam_session_service" : "Exam session service",
 
   "note" : "Note",
-  "change_station" : "You can change the station from here"
+  "change_station" : "You can change the station from here",
+  "id_number" : "ID number"
 
 
 }

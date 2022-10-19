@@ -66,7 +66,8 @@ class LoginController extends GetxController{
     print('successfully');
     studentDay.clear();
     studentDay.addAll(value.days);
-    await UserInfo.saveUserInformation(studentId.text, value.phone, value.email, password.text, value.name,value.token, value.id.toString());
+
+    await UserInfo.saveUserInformation(studentId.text, value.nationalId, value.phone, value.email, password.text, value.name,value.token, value.id.toString());
     await UserInfo.loadUserInformation();
     loading.value = false;
     studentId.clear();

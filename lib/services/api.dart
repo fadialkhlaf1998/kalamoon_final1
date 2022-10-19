@@ -61,14 +61,14 @@ class Api{
         Global.adminToken = jsonDecode(data)['token'];
         Global.adminId = jsonDecode(data)['id'].toString();
         Global.adminRule = jsonDecode(data)['rule'];
-        return User(id: -1, studentId: '-1', phone: '-1', universityId: -1, password: '', email: '', rule: '', days: [], isActive: -1 , name: '', token: '', macId: '');
+        return User(id: -1, studentId: '-1', phone: '-1', universityId: -1,nationalId: '-1', password: '', email: '', rule: '', days: [], isActive: -1 , name: '', token: '', macId: '');
       }
 
     }
     else {
       print(response.reasonPhrase);
       UserInfo.clear();
-      return User(id: -1, studentId: '-1', phone: '-1', universityId: -1, password: '', email: '', rule: '', days: [], isActive: -1 , name: '', token: '', macId: '');
+      return User(id: -1, studentId: '-1',nationalId: '-1', phone: '-1', universityId: -1, password: '', email: '', rule: '', days: [], isActive: -1 , name: '', token: '', macId: '');
     }
   }
 
@@ -101,14 +101,15 @@ class Api{
       //log(data);
 
       User u = User.fromMap(jsonDecode(data));
-      await UserInfo.saveUserInformation(u.studentId, u.phone, u.email, u.password, u.name,u.token, u.id.toString());
+
+      await UserInfo.saveUserInformation(u.studentId,u.nationalId, u.phone, u.email, u.password, u.name,u.token, u.id.toString());
       await UserInfo.loadUserInformation();
 
       return u;
     }
     else {
       UserInfo.clear();
-      return User(id: -1, studentId: '-1', phone: '-1', universityId: -1, password: '', email: '', rule: '', days: [], isActive: -1 , name: '', token: '',macId: '');
+      return User(id: -1, studentId: '-1',nationalId: '-1', phone: '-1', universityId: -1, password: '', email: '', rule: '', days: [], isActive: -1 , name: '', token: '',macId: '');
     }
 
   }
