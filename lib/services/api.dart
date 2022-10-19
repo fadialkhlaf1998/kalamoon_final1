@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:kalamoon_final/services/store.dart';
 import '../model/start_up_data.dart';
 import '../services/global.dart';
 import '../services/user_info.dart';
@@ -56,7 +54,7 @@ class Api{
 
     if (response.statusCode == 200) {
       var data = await response.stream.bytesToString();
-      log(data);
+      // log(data);
       try{
         return User.fromMap(jsonDecode(data));
       }catch(err){
@@ -100,7 +98,7 @@ class Api{
 
     if (response.statusCode == 200) {
       var data = await response.stream.bytesToString();
-      log(data);
+      //log(data);
 
       User u = User.fromMap(jsonDecode(data));
       await UserInfo.saveUserInformation(u.studentId, u.phone, u.email, u.password, u.name,u.token, u.id.toString());
@@ -123,13 +121,8 @@ class Api{
 
     if (response.statusCode == 200) {
       var jsonData = await response.stream.bytesToString();
-      print(jsonData);
+      // print(jsonData);
       return StartUpData.fromMap(jsonDecode(jsonData));
-      // var list = jsonDecode(jsonData) as List;
-      // List<StartUpData> data = <StartUpData>[];
-      // for(var d in list){
-      //   data.add(StartUpData.fromMap(d));
-      // }
     }
     else {
       print(response.reasonPhrase);
@@ -156,7 +149,7 @@ class Api{
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      // print(await response.stream.bytesToString());
       return true;
     }
     else {

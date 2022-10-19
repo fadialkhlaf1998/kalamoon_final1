@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kalamoon_final/app_localization.dart';
+import 'package:get/get.dart';
 
 class AppStyle{
 
@@ -18,6 +20,35 @@ class AppStyle{
     return MediaQuery.of(context).size.height * (percent / 100);
   }
 
+  static errorNotification(context, title, subTitle){
+    return Get.snackbar(
+        App_Localization.of(context).translate(title),
+        App_Localization.of(context).translate(subTitle),
+        margin: const EdgeInsets.only(top: 20,left: 25,right: 25),
+        backgroundColor: AppStyle.red,
+        icon: const Icon(Icons.warning));
+  }
+
+  static successNotification(context,title, subTitle){
+    return Get.snackbar(
+        App_Localization.of(context).translate(title),
+        App_Localization.of(context).translate(subTitle),
+        margin: const EdgeInsets.only(top: 20,left: 25,right: 25),
+        backgroundColor: Colors.green,
+        icon: const Icon(Icons.check)
+    );
+  }
+
+  static noteNotification(context,title, subTitle){
+    return Get.snackbar(
+        App_Localization.of(context).translate(title),
+        App_Localization.of(context).translate(subTitle),
+        margin: const EdgeInsets.only(top: 20,left: 25,right: 25),
+        backgroundColor: Colors.grey,
+        icon: const Icon(Icons.warning)
+    );
+  }
+
 
 }
 
@@ -31,7 +62,10 @@ abstract class CommonTextStyle {
   static const xlargeTextStyle = 22.0;
   static const xxlargeTextStyle = 26.0;
 
-  static const String fontFamilyName = "Khebrat";
+
+
+  static const String fontFamilyName ="Khebrat" ;
+  // Global.langCode == 'en' ? 'Muli' :
 
   static const textStyleForBigButton = TextStyle(
     fontFamily: fontFamilyName,
@@ -72,24 +106,33 @@ abstract class CommonTextStyle {
   static selectionMenuTextStyle(BuildContext context){
     return TextStyle(
         fontFamily: fontFamilyName,
-        fontSize: mediumTextStyle,
-        color: Theme.of(context).dividerColor
+        fontSize: bigTextStyle,
+        color: Theme.of(context).dividerColor,
     );
   }
 
   static const TextStyle settingsTextStyle = TextStyle(
       fontFamily: fontFamilyName,
-      fontSize: bigTextStyle,
+      fontSize: mediumTextStyle,
       color: Colors.white,//Theme.of(context).dividerColor,
     //MyTheme.isDarkTheme.value ? Colors.white : Colors.black
   );
   static settingsTextStyle1(BuildContext context){
     return TextStyle(
       fontFamily: fontFamilyName,
-      fontSize: bigTextStyle,
+      fontSize: mediumTextStyle,
       color: Theme.of(context).dividerColor,
     );
   }
+
+  static servicesTextStyle(BuildContext context){
+    return TextStyle(
+      fontFamily: fontFamilyName,
+      fontSize: mediumTextStyle,
+      color: Theme.of(context).dividerColor,
+    );
+  }
+
   static settingsSmallTextStyle(BuildContext context){
     return TextStyle(
       fontFamily: fontFamilyName,
@@ -112,5 +155,7 @@ abstract class CommonTextStyle {
       child: toHeroContext.widget,
     );
   }
+
+
 
 }

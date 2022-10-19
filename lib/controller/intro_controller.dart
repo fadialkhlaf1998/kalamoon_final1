@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'package:flutter/services.dart';
+import 'dart:io';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../view/no_internet_page.dart';
 import '../view/notActivatePage.dart';
-import 'package:platform_device_id/platform_device_id.dart';
-import 'package:unique_identifier/unique_identifier.dart';
 import '../model/start_up_data.dart';
 import '../controller/login_controller.dart';
 import '../services/api.dart';
@@ -18,20 +17,20 @@ class IntroController extends GetxController{
   RxList<Hour> beginHourList = <Hour>[].obs;
   RxList<Hour> endHourList = <Hour>[].obs;
   RxList<University> universityList = <University>[].obs;
+  RxBool signUpButton = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     getData();
-    // checkLogin();
   }
 
-  reInit(int station_id)async{
-    print(loginController.studentDay[0].meet.length.toString()+":***");
-    if(loginController.studentDay[0].meet.length > 0){
-      await Api.editAllMeet(station_id.toString(), UserInfo.id.toString());
+  reInit(int stationId)async{
+    // print(loginController.studentDay[0].meet.length.toString()+":***");
+    if(loginController.studentDay[0].meet.isNotEmpty){
+      await Api.editAllMeet(stationId.toString(), UserInfo.id.toString());
     }else{
-      await Api.addAllMeet(station_id.toString(), UserInfo.id.toString());
+      await Api.addAllMeet(stationId.toString(), UserInfo.id.toString());
     }
     getData();
   }
@@ -48,23 +47,21 @@ class IntroController extends GetxController{
             universityList.value=value.university;
             checkLogin();
           }else{
-            //todo reGetData
+            ///reGetData
             getData();
-            print('no data');
           }
         }).catchError((err){
           print(err);
         });
       }else{
-        print('no internet');
         await UserInfo.loadUserInformation();
         int id = -1;
         try{
          id = int.parse(UserInfo.id);
         }catch(err){
-
+          print(err);
         }
-        print(id.toString() +"****************------*******");
+        // print(id.toString() +"****************------*******");
         Future.delayed(const Duration(milliseconds: 500)).then((value){
           Get.to(()=>NoInternetPage(id))!.then((value) {
             getData();
@@ -76,11 +73,8 @@ class IntroController extends GetxController{
 
 
   checkLogin() async {
-
     // String? identifier = await UniqueIdentifier.serial;
     // print(identifier);
-
-
     await UserInfo.loadUserInformation();
     if(UserInfo.studentId == '-1'){
       Timer(const Duration(milliseconds: 2000),(){
@@ -100,6 +94,38 @@ class IntroController extends GetxController{
           Get.offAllNamed('/welcome');
         }
       });
+    }
+  }
+
+  createAccount() async {
+    String message = "";
+    String number = '0934481988';
+    if (Platform.isAndroid){
+      // ignore: deprecated_member_use
+      if(await canLaunch("https://wa.me/$number/?text=${Uri.parse(message)}")){
+        // ignore: deprecated_member_use
+        await launch("https://wa.me/$number/?text=${Uri.parse(message)}");
+      }else{
+        // App.error_msg(context, 'can\'t open Whatsapp');
+        final Uri launchUri = Uri(
+          scheme: 'tel',
+          path: number,
+        );
+        await launchUrl(launchUri);
+      }
+    }else if(Platform.isIOS){
+      // ignore: deprecated_member_use
+      if(await canLaunch("https://api.whatsapp.com/send?phone=$number=${Uri.parse(message)}")){
+        // ignore: deprecated_member_use
+        await launch("https://api.whatsapp.com/send?phone=$number=${Uri.parse(message)}");
+      }else{
+        // App.error_msg(context, 'can\'t open Whatsapp');
+        final Uri launchUri = Uri(
+          scheme: 'tel',
+          path: number,
+        );
+        await launchUrl(launchUri);
+      }
     }
   }
 

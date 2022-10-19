@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:kalamoon_final/services/app_style.dart';
+import 'package:kalamoon_final/services/myTheme.dart';
 import '../app_localization.dart';
 
 class MainPageController extends GetxController{
@@ -23,7 +25,12 @@ class MainPageController extends GetxController{
         timeBackPressed = DateTime.now();
         if(isExitWarning){
           String message = App_Localization.of(context).translate('press_back_to_exit');
-          Fluttertoast.showToast(msg: message, fontSize: 14);
+          Fluttertoast.showToast(
+              msg: message,
+              fontSize: 15,
+            backgroundColor: Theme.of(context).dividerColor,
+            textColor: MyTheme.isDarkTheme.value ? AppStyle.red : Colors.white
+          );
           return false;
         }else{
           Fluttertoast.cancel();
@@ -31,8 +38,8 @@ class MainPageController extends GetxController{
         }
       }
     }else{
+      selectedIndex.value = 0;
       pageController.animateToPage(0, duration: const Duration(milliseconds: 700), curve: Curves.fastOutSlowIn);
-      selectedIndex.value == 0;
       return false;
     }
   }

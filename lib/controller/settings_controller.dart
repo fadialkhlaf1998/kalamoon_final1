@@ -16,6 +16,7 @@ class SettingsController extends GetxController{
   RxBool openLanguageMenu = false.obs;
   RxInt languageChooseIndex = 0.obs;
   RxBool openDialogLogout = false.obs;
+  RxBool stationLight = false.obs;
 
 
   @override
@@ -54,14 +55,13 @@ class SettingsController extends GetxController{
       changeLanguage(context, 'ar');
       languageChooseIndex.value = 1;
     }
-    Future.delayed(Duration(milliseconds: 500)).then((value){
+    Future.delayed(const Duration(milliseconds: 500)).then((value){
       openLanguageMenu.value = false;
     });
   }
 
   logout(){
     UserInfo.clear();
-
     openDialogLogout.value = false;
     Get.offAllNamed('/welcome');
   }

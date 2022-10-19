@@ -1,50 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kalamoon_final/controller/intro_controller.dart';
+import 'package:kalamoon_final/widget/confirm_dialog.dart';
 import '../app_localization.dart';
 import '../services/app_style.dart';
 import '../widget/custom_button.dart';
 import '../widget/logo_container.dart';
 
 class Welcome extends StatelessWidget {
-  const Welcome({Key? key}) : super(key: key);
+
+  IntroController introController = Get.find();
 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/images/new_background.jpg')
-                  )
-              ),
-            ),
-            Container(
-              width: Get.width,
-              height: Get.height,
-              color: AppStyle.grey.withOpacity(0.5),
-            ),
-            Container(
-              width: AppStyle.getDeviceWidth(100, context),
-              padding: const EdgeInsets.only(top: 40),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _logo(),
-                  _welcomeText(context),
-                  _chooseOption(context)
-                ],
-              ),
-            ),
-          ],
-        )
-      ),
-    );
+    return Obx((){
+      return Scaffold(
+        body: SafeArea(
+            child: Stack(
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/new_background.jpg')
+                      )
+                  ),
+                ),
+                Container(
+                  width: Get.width,
+                  height: Get.height,
+                  color: AppStyle.grey.withOpacity(0.5),
+                ),
+                Container(
+                  width: AppStyle.getDeviceWidth(100, context),
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _logo(),
+                      _welcomeText(context),
+                      _chooseOption(context)
+                    ],
+                  ),
+                ),
+                ConfirmDialog(
+                    width: 70,
+                    height: 200,
+                    title: 'create_account',
+                    description: 'contact_create_account',
+                    button1Text: 'cancel',
+                    button2Text: 'contact',
+                    button1Pressed:(){
+                      introController.signUpButton.value = false;
+                    },
+                    button2Pressed:(){
+                      introController.signUpButton.value = false;
+                      introController.createAccount();
+                    },
+                    openDialog: introController.signUpButton.value,
+                    errorConfirm: false
+                ),
+              ],
+            )
+        ),
+      );
+    });
   }
 
   _logo(){
@@ -105,26 +127,26 @@ class Welcome extends StatelessWidget {
               textStyle: CommonTextStyle.textStyleForBigButton
           ),
         ),
-        // const SizedBox(height: 20),
-        // Hero(
-        //   flightShuttleBuilder: CommonTextStyle.flightShuttleBuilder,
-        //   tag: 'button2',
-        //   child: CustomButton(
-        //       width: 80,
-        //       height: 7,
-        //       text: App_Localization.of(context).translate('sign_up'),
-        //       onPressed: (){
-        //         Get.toNamed('/signUp');
-        //       },
-        //       color: Colors.transparent, //AppStyle.lightBlue,
-        //       color2: Colors.transparent,//AppStyle.darkBlue,
-        //       borderRadius: 15,
-        //       borderColor: Colors.white,
-        //       borderWidth: 1.5,
-        //       border: true,
-        //       textStyle: CommonTextStyle.textStyleForBigButton
-        //   ),
-        // ),
+        const SizedBox(height: 20),
+        Hero(
+          flightShuttleBuilder: CommonTextStyle.flightShuttleBuilder,
+          tag: 'button2',
+          child: CustomButton(
+              width: 80,
+              height: 7,
+              text: App_Localization.of(context).translate('sign_up'),
+              onPressed: (){
+                introController.signUpButton.value = true;
+              },
+              color: Colors.transparent,
+              color2: Colors.transparent,
+              borderRadius: 15,
+              borderColor: Colors.white,
+              borderWidth: 1.5,
+              border: true,
+              textStyle: CommonTextStyle.textStyleForBigButton
+          ),
+        ),
         const SizedBox(height: 60),
         Container(
           margin: const EdgeInsets.symmetric(vertical: 30),

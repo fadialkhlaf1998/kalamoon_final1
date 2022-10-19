@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:kalamoon_final/controller/home_controller.dart';
-import 'package:kalamoon_final/controller/intro_conroller.dart';
-import 'package:kalamoon_final/view/home.dart';
-import 'package:kalamoon_final/view/intro.dart';
+import 'package:kalamoon_final/controller/intro_controller.dart';
 import '../widget/confirm_dialog.dart';
 import '../app_localization.dart';
 import '../services/app_style.dart';
 import '../services/myTheme.dart';
 import '../services/store.dart';
 import '../controller/settings_controller.dart';
-import '../widget/custom_button.dart';
 
 class Settings extends StatelessWidget {
 
-  SettingsController settingsController = Get.put(SettingsController());
+  SettingsController settingsController = Get.find();
 
   int heightItem = 10;
 
   @override
   Widget build(BuildContext context) {
-
     return Obx((){
-
       return Scaffold(
         body: SafeArea(
             child: Stack(
@@ -33,7 +27,7 @@ class Settings extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10),
                       _title(context),
                       _menu(context),
                       const SizedBox(height: 40),
@@ -123,6 +117,10 @@ class Settings extends StatelessWidget {
         GestureDetector(
           onTap: (){
             settingsController.openLanguageChooseMenu();
+            // if(Global.langCode == 'en'){
+            //   CommonTextStyle.fontFamilyName = 'Muli';
+            // }
+            // Restart.restartApp();
           },
           child: Container(
             color: Colors.transparent,
@@ -188,33 +186,33 @@ class Settings extends StatelessWidget {
     );
   }
 
-  _dropDownMenu(context){
-    return Obx((){
-      return  SizedBox(
-        child: DropdownButton(
-          underline: SizedBox(),
-          value: settingsController.dropDownValue.value == 'none' ? null : settingsController.dropDownValue.value,
-          icon: const Icon(Icons.keyboard_arrow_down),
-          items: settingsController.languageList.map((String items) {
-            return DropdownMenuItem(
-              value: items,
-              child: Text(items),
-            );
-          }).toList(),
-          style: CommonTextStyle.settingsSmallTextStyle(context),
-          dropdownColor: Theme.of(context).backgroundColor,
-          onChanged: (value){
-            if(value == 'English'){
-              settingsController.changeLanguage(context, 'en');
-            }else{
-              settingsController.changeLanguage(context, 'ar');
-            }
-            settingsController.dropDownValue.value = value.toString();
-          },
-        ),
-      );
-    });
-  }
+  // _dropDownMenu(context){
+  //   return Obx((){
+  //     return  SizedBox(
+  //       child: DropdownButton(
+  //         underline: SizedBox(),
+  //         value: settingsController.dropDownValue.value == 'none' ? null : settingsController.dropDownValue.value,
+  //         icon: const Icon(Icons.keyboard_arrow_down),
+  //         items: settingsController.languageList.map((String items) {
+  //           return DropdownMenuItem(
+  //             value: items,
+  //             child: Text(items),
+  //           );
+  //         }).toList(),
+  //         style: CommonTextStyle.settingsSmallTextStyle(context),
+  //         dropdownColor: Theme.of(context).backgroundColor,
+  //         onChanged: (value){
+  //           if(value == 'English'){
+  //             settingsController.changeLanguage(context, 'en');
+  //           }else{
+  //             settingsController.changeLanguage(context, 'ar');
+  //           }
+  //           settingsController.dropDownValue.value = value.toString();
+  //         },
+  //       ),
+  //     );
+  //   });
+  // }
 
   _changePassword(context){
     return GestureDetector(
@@ -286,13 +284,16 @@ class Settings extends StatelessWidget {
   _station(context){
     return GestureDetector(
       onTap: (){
-        // print('-------------');
         IntroController introController = Get.find();
         Get.toNamed('/selectionMenu',arguments: ['الموقف المعتمد', 'selection2', introController.stationsList]);
       },
-      child: Container(
-        color: Colors.transparent,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 1000),
         height: AppStyle.getDeviceHeight(heightItem, context),
+       decoration: BoxDecoration(
+         color: settingsController.stationLight.value ? Colors.red.withOpacity(0.7) : Colors.transparent,
+         borderRadius: BorderRadius.circular(20),
+       ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

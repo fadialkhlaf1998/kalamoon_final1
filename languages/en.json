@@ -83,6 +83,20 @@
   "oops_wrong_happen": "Oops wrong happen",
   "please_save_changes_first": "Please save changes first",
   "no_internet_msg": "No internet connection",
-  "no_internet_msg_desc": "Please connect to internet"
+  "no_internet_msg_desc": "Please connect to internet",
+
+
+  "create account" : "Create account",
+  "contact_create_account" : "Contact us to create an account for you",
+  "contact" : "Contact",
+  "services" : "Our Services",
+
+  "printing_service" : "Printing service",
+  "bill_payment_service" : "Bill payment service (MTN - Syriatel - Net)",
+  "exam_session_service" : "Exam session service",
+
+  "note" : "Note",
+  "change_station" : "You can change the station from here"
+
 
 }

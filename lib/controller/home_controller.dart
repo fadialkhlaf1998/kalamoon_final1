@@ -1,12 +1,8 @@
-
-
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../services/api.dart';
 import '../services/app_style.dart';
 import '../services/user_info.dart';
-import '../controller/intro_conroller.dart';
+import '../controller/intro_controller.dart';
 import '../controller/login_controller.dart';
 import '../app_localization.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -39,25 +35,23 @@ class HomeController extends GetxController{
   RxBool loading = false.obs;
 
 
-  @override
-  void onInit() {
-    super.onInit();
-    Future.delayed(Duration(milliseconds: 500)).then((value){
-      if(loginController.studentDay[0].meet.isEmpty){
-        /// todo
-        /// remove comment
-        //Get.toNamed('/selectionMenu',arguments: ['الموقف المعتمد', 'selection2', introController.stationsList]);
-      }else{
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //
+    // Future.delayed(const Duration(milliseconds: 500)).then((value){
+    //   if(loginController.studentDay[0].meet.isEmpty){
+    //     // Get.toNamed('/selectionMenu',arguments: ['الموقف المعتمد', 'selection2', introController.stationsList]);
+    //   }else{
+    //
+    //   }
+    // });
+  // }
 
-      }
-    });
-
-
-  }
   // Future scrollToItem(index) async{
   //   itemScrollController.scrollTo(
   //       index: index,
-  //       alignment: index == 0 ? 0 : index == daysList.length - 1 ? 0.5 : 0.4,
+  //       alignment: index == 0 ? index == introController.weekDayList.length - 1 ? 0.5 : 0.4 : 0 ,
   //       curve: Curves.fastOutSlowIn,
   //       duration: const Duration(milliseconds: 1000)
   //   );
@@ -106,13 +100,7 @@ class HomeController extends GetxController{
         }
 
         if(newBeginHourValue.isNotEmpty && newStationValue.isEmpty){
-          Get.snackbar(
-              App_Localization.of(context).translate('warning'),
-              App_Localization.of(context).translate('you_should_choose_station'),
-              margin: const EdgeInsets.only(top: 20,left: 25,right: 25),
-              backgroundColor: AppStyle.red,
-              icon: const Icon(Icons.warning)
-          );
+          AppStyle.errorNotification(context, 'warning', 'you_should_choose_station');
         }else if(beginHourDataToSave == null && endHourDataToSave == null){
           editMode.value = false;
           resetValue();
@@ -122,21 +110,17 @@ class HomeController extends GetxController{
             if(value){
               editMode.value = false;
             }else{
-              print('error');
               loading.value = false;
             }
           });
           Future.delayed(const Duration(milliseconds: 500)).then((value) async {
             await Api.login(UserInfo.studentId, UserInfo.password).then((value) async{
               if(value.id != -1) {
-                print('------------------');
                 loginController.studentDay.clear();
                 loginController.studentDay.addAll(value.days);
-                print(loginController.studentDay[selectDay.value].meet.length);
                 resetValue();
                 loading.value = false;
               }else{
-                print('error login');
                 loading.value = false;
               }
             });
@@ -144,11 +128,11 @@ class HomeController extends GetxController{
         }
 
 
-        print('========================');
-        print(beginHourDataToSave);
-        print(endHourDataToSave);
-        print(stationDataToSave);
-        print('========================');
+        // print('========================');
+        // print(beginHourDataToSave);
+        // print(endHourDataToSave);
+        // print(stationDataToSave);
+        // print('========================');
 
       }else{
 
@@ -189,12 +173,12 @@ class HomeController extends GetxController{
         }else{
           stationDataToSave = introController.stationsList[selectIndexForStation.value].id.toString();
         }
-
-        print('========================');
-        print(beginHourDataToSave);
-        print(endHourDataToSave);
-        print(stationDataToSave);
-        print('========================');
+        //
+        // print('========================');
+        // print(beginHourDataToSave);
+        // print(endHourDataToSave);
+        // print(stationDataToSave);
+        // print('========================');
         loading.value = true;
         // if(beginHourDataToSave == null){
         //   stationDataToSave = null;
@@ -205,7 +189,6 @@ class HomeController extends GetxController{
               if(value){
                 editMode.value = false;
               }else{
-                print('error');
                 loading.value = false;
           }
         });
@@ -214,11 +197,11 @@ class HomeController extends GetxController{
               if(value.id != -1) {
                 loginController.studentDay.clear();
                 loginController.studentDay.addAll(value.days);
-                print(loginController.studentDay[selectDay.value].meet.length);
+                //print(loginController.studentDay[selectDay.value].meet.length);
                 resetValue();
                 loading.value = false;
               }else{
-                print('error login');
+                // print('error login');
                 loading.value = false;
               }
             });
@@ -253,9 +236,9 @@ class HomeController extends GetxController{
       if(value){
         Api.deleteMeet(meetId).then((value){
           if(value){
-            print('successfully');
+            // print('successfully');
           }else{
-            print('error');
+            // print('error');
           }
         });
       }else{
@@ -267,15 +250,13 @@ class HomeController extends GetxController{
   deleteMeetOperation() async {
     deleteMeet();
     editMode.value = false;
-    Future.delayed(Duration(milliseconds: 500)).then((value) async {
+    Future.delayed(const Duration(milliseconds: 500)).then((value) async {
         await Api.login(UserInfo.studentId, UserInfo.password).then((value) async{
           if(value.id != -1) {
-            print('------------------');
             loginController.studentDay.clear();
             loginController.studentDay.addAll(value.days);
-            print(loginController.studentDay[selectDay.value].meet.length);
           }else{
-            print('error login');
+
           }
         });
     });

@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../app_localization.dart';
-import '../../controller/sub_admin/main_page_controller.dart';
 import '../../services/api.dart';
 import '../../services/app_style.dart';
 import '../../services/encryption.dart';
@@ -13,13 +12,24 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class MainPageAdmin extends StatelessWidget {
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          GestureDetector(
+            onTap: (){
+              Get.offAllNamed('/welcome');
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15),
+              child: const Icon(Icons.logout),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
-        child: Container(
+        child: SizedBox(
           width: Get.width,
           height: Get.height,
           child: Center(

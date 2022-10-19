@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../services/api.dart';
-import '../services/user_info.dart';
 import '../app_localization.dart';
 import '../services/app_style.dart';
 import '../controller/login_controller.dart';
@@ -123,14 +121,12 @@ class Login extends StatelessWidget {
           width: AppStyle.getDeviceWidth(80, context),
           child: GestureDetector(
             onTap: () async {
-              /// todo
-              /// lunch whatsapp
               await loginController.forgetPassword();
             },
             child: Text(
               App_Localization.of(context).translate('forger_your_password'),
               textAlign: TextAlign.end,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 14,
               ),
@@ -155,8 +151,6 @@ class Login extends StatelessWidget {
                 height: 7,
                 text: App_Localization.of(context).translate('sign_in'),
                 onPressed:(){
-                  /// todo
-               //   Get.offAllNamed('/mainPage');
                   loginController.login(context);
                 },
                 color: AppStyle.lightRed,

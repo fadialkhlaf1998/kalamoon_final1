@@ -2,7 +2,7 @@
   "welcome" : "أهلاً وسهلاً ..",
   "welcome_details" : "مشتركي خدمة النقل المميزة من شركة نبض",
   "sign_in" : "تسجيل الدخول",
-  "sign_up" : "تسجيل",
+  "sign_up" : "لا تملك حساب؟",
   "change_language" : "تغيير اللغة",
   "home" : "الرئيسية",
   "settings" : "الإعدادات",
@@ -77,10 +77,23 @@
   "successfully_registered" : "تم تسجيل الحضور بنجاح",
   "you_should_choose_station" : "يجب اختيار موقف",
 
-  "please_be_in": " الرجاء التواجد في الموقف المعتمد عند الساعة ",
+  "please_be_in": " الرجاء التواجد في الموقف المعتمد\n في تمام الساعة ",
   "oops_wrong_happen": "عفواً حدث خطأ",
   "please_save_changes_first": "الرجاء حفظ التغييرات أولاً",
   "no_internet_msg": "لا يوخد أنترنت",
-  "no_internet_msg_desc": "الرجاء الاتصال بالأنترنت"
+  "no_internet_msg_desc": "الرجاء الاتصال بالأنترنت",
+
+  "create_account" : "إنشاء حساب",
+  "contact_create_account" : "اتصل بنا لإنشاء حساب",
+  "contact" : "اتصال",
+  "services" : "خدماتنا",
+
+
+  "printing_service" : "خدمة الطباعة",
+  "bill_payment_service" : "خدمة دفع الفواتير (MTN - Syriatel - إنترنت)",
+  "exam_session_service" : "خدمة الجلسات الامتحانية",
+
+  "note" : "ملاحظة",
+  "change_station" : "يمكنك تغيير المحطة من هنا"
 
 }

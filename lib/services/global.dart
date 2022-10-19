@@ -31,7 +31,6 @@ class Global {
         langCode = lang;
       }else{
         langCode="ar";
-        //todo arabic default
       }
       print('Language: '+langCode);
       Get.updateLocale(Locale(langCode));

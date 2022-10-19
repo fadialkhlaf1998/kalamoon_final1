@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../app_localization.dart';
 import '../services/app_style.dart';
 import '../services/global.dart';
 import '../view/notActivatePage.dart';
@@ -24,29 +23,11 @@ class LoginController extends GetxController{
 
   Future login(BuildContext context) async {
     if(studentId.text.isEmpty){
-      Get.snackbar(
-          App_Localization.of(context).translate('warning'),
-          App_Localization.of(context).translate('studentID_empty'),
-        margin: const EdgeInsets.only(top: 20,left: 25,right: 25),
-        backgroundColor: AppStyle.red,
-        icon: const Icon(Icons.warning)
-      );
+      AppStyle.errorNotification(context, 'warning', 'studentID_empty');
     }else if (password.text.isEmpty){
-      Get.snackbar(
-          App_Localization.of(context).translate('warning'),
-          App_Localization.of(context).translate('password_empty'),
-          margin: const EdgeInsets.only(top: 20,left: 25,right: 25),
-          backgroundColor: AppStyle.red,
-          icon: const Icon(Icons.warning)
-      );
+      AppStyle.errorNotification(context, 'warning', 'password_empty');
     }else if(password.text.length < 4){
-      Get.snackbar(
-          App_Localization.of(context).translate('warning'),
-          App_Localization.of(context).translate('password_length'),
-          margin: const EdgeInsets.only(top: 20,left: 25,right: 25),
-          backgroundColor: AppStyle.red,
-          icon: const Icon(Icons.warning)
-      );
+      AppStyle.errorNotification(context, 'warning', 'password_length');
     }else{
       loading.value = true;
       Api.checkInternet().then((value){
@@ -64,28 +45,17 @@ class LoginController extends GetxController{
             }else if(Global.adminRule == 'sub-admin'){
               // Global.adminId = value.id.toString();
               // Global.adminToken = value.token.toString();
-              print('-----------Here Admin Token---------');
-              print(Global.adminToken);
-              print(Global.adminId);
+              // print('-----------Here Admin Token---------');
+              // print(Global.adminToken);
+              // print(Global.adminId);
               subAdminOperation(context);
             }else{
-              /// todo
-              /// No user with this information
               print('error');
               loading.value = false;
-              Get.snackbar(
-                  App_Localization.of(context).translate('error'),
-                  App_Localization.of(context).translate('email_password_wrong'),
-                  margin: const EdgeInsets.only(top: 20,left: 25,right: 25),
-                  backgroundColor: AppStyle.red,
-                  icon: const Icon(Icons.warning),
-              );
+              AppStyle.errorNotification(context, 'warning', 'email_password_wrong');
             }
           });
         }else{
-          /// todo
-          /// on internet
-          print(' on internet page');
           loading.value = false;
         }
       });
@@ -101,13 +71,7 @@ class LoginController extends GetxController{
     loading.value = false;
     studentId.clear();
     password.clear();
-    Get.snackbar(
-        App_Localization.of(context).translate('welcome'),
-        App_Localization.of(context).translate('success_login'),
-        margin: const EdgeInsets.only(top: 20,left: 25,right: 25),
-        backgroundColor: Colors.green,
-        icon: const Icon(Icons.check)
-    );
+    AppStyle.successNotification(context, 'welcome', 'success_login');
     Get.offAllNamed('/mainPage');
     // Get.to(NotActivatePage());
   }
@@ -115,13 +79,7 @@ class LoginController extends GetxController{
   subAdminOperation(context){
     studentId.clear();
     password.clear();
-    Get.snackbar(
-        App_Localization.of(context).translate('welcome'),
-        App_Localization.of(context).translate('subAdmin_account'),
-        margin: const EdgeInsets.only(top: 20,left: 25,right: 25),
-        backgroundColor: Colors.green,
-        icon: const Icon(Icons.check)
-    );
+    AppStyle.successNotification(context, 'welcome', 'subAdmin_account');
     Get.offAllNamed('/mainPageAdmin');
   }
 
@@ -130,8 +88,10 @@ class LoginController extends GetxController{
     String message = "";
     String number = '0934481988';
     if (Platform.isAndroid){
-      if(await canLaunch("https://wa.me/${number}/?text=${Uri.parse(message)}")){
-    await launch("https://wa.me/${number}/?text=${Uri.parse(message)}");
+      // ignore: deprecated_member_use
+      if(await canLaunch("https://wa.me/$number/?text=${Uri.parse(message)}")){
+        // ignore: deprecated_member_use
+        await launch("https://wa.me/$number/?text=${Uri.parse(message)}");
     }else{
     // App.error_msg(context, 'can\'t open Whatsapp');
         final Uri launchUri = Uri(
@@ -141,8 +101,10 @@ class LoginController extends GetxController{
         await launchUrl(launchUri);
     }
     }else if(Platform.isIOS){
-    if(await canLaunch("https://api.whatsapp.com/send?phone=${number}=${Uri.parse(message)}")){
-    await launch("https://api.whatsapp.com/send?phone=${number}=${Uri.parse(message)}");
+      // ignore: deprecated_member_use
+      if(await canLaunch("https://api.whatsapp.com/send?phone=$number=${Uri.parse(message)}")){
+        // ignore: deprecated_member_use
+        await launch("https://api.whatsapp.com/send?phone=$number=${Uri.parse(message)}");
     }else{
     // App.error_msg(context, 'can\'t open Whatsapp');
       final Uri launchUri = Uri(

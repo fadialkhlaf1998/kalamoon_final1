@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../services/app_style.dart';
-import '../controller/intro_conroller.dart';
+import '../controller/intro_controller.dart';
 import '../widget/logo_container.dart';
 
 class Intro extends StatelessWidget {
 
   IntroController introController = Get.put(IntroController());
+
 
   @override
   Widget build(BuildContext context) {

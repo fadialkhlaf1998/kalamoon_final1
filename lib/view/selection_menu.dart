@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kalamoon_final/controller/intro_conroller.dart';
+import 'package:kalamoon_final/controller/intro_controller.dart';
 import 'package:kalamoon_final/view/intro.dart';
 import '../controller/home_controller.dart';
 import '../app_localization.dart';
@@ -83,43 +83,13 @@ class SelectionMenu extends StatelessWidget {
                   borderColor: Colors.white,
                   borderWidth: 0,
                   border: false,
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     color: Colors.white,
                     fontFamily: 'Khebrat',
                     fontWeight: FontWeight.normal,
                     fontSize: CommonTextStyle.bigTextStyle,
                   )
               ),
-              // const SizedBox(height: 10),
-              // CustomButton(
-              //     width: 90,
-              //     height: 7,
-              //     text: App_Localization.of(context).translate('back'),
-              //     onPressed: (){
-              //       if(data[1] == 'selection1'){
-              //         if(homeController.newBeginHourValue.isNotEmpty){
-              //           Get.back();
-              //         }
-              //       }else if(data[1] == 'selection'){
-              //         if(homeController.newEndHourValue.isNotEmpty){
-              //           Get.back();
-              //         }
-              //       }
-              //       Get.back();
-              //     },
-              //     color: Theme.of(context).disabledColor,
-              //     color2:Theme.of(context).disabledColor,
-              //     borderRadius: 10,
-              //     borderColor: Colors.white,
-              //     borderWidth: 0,
-              //     border: false,
-              //     textStyle: TextStyle(
-              //         color: MyTheme.isDarkTheme.value ? Colors.white : Colors.grey,
-              //       fontFamily: 'Muli',
-              //       fontWeight: FontWeight.bold,
-              //       fontSize: CommonTextStyle.bigTextStyle,
-              //     )
-              // ),
               const SizedBox(height: 10),
               data[1] == 'selection2'
                   ? const Text('')
@@ -182,7 +152,6 @@ class SelectionMenu extends StatelessWidget {
                     selectionMenuController.selectIndex.value = index;
                     homeController.selectIndexForStation.value = index;
                     homeController.newStationValue.value = data[2][index].title;
-                    print('*********');
                     },
                   child: Stack(
                     alignment: Alignment.center,
@@ -253,7 +222,7 @@ class SelectionMenu extends StatelessWidget {
                                     style: TextStyle(
                                         fontSize: 16,
                                         color: Theme.of(context).dividerColor,
-                                        fontWeight: FontWeight.bold
+                                        fontWeight: FontWeight.normal
                                     ),
                                   ),
                                   const SizedBox(height: 5),
@@ -282,10 +251,11 @@ class SelectionMenu extends StatelessWidget {
                         if(data[1] == 'selection'){
                           homeController.selectIndexForEndHour.value = index;
                           homeController.newEndHourValue.value = data[2][index].hour;
+                          homeController.cancelEndHour.value = false;
                         }else if(data[1] == 'selection1'){
                           homeController.selectIndexForBeginHour.value = index;
                           homeController.newBeginHourValue.value = data[2][index].hour;
-
+                          homeController.cancelBeginHour.value = false;
                         }
                         // print('-----------------------------');
                         // print( homeController.selectIndexForEndHour.value);

@@ -1,20 +1,27 @@
+
+
 import 'dart:io';
+
 import 'package:get/get.dart';
-import '../services/app_style.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class NotActivationController extends GetxController{
+class ServicesController extends GetxController{
 
-  whatsapp(context) async {
+
+  servicesRequest(String number) async {
     String message = "";
-    String number = '0934481988';
     if (Platform.isAndroid){
       // ignore: deprecated_member_use
       if(await canLaunch("https://wa.me/$number/?text=${Uri.parse(message)}")){
         // ignore: deprecated_member_use
         await launch("https://wa.me/$number/?text=${Uri.parse(message)}");
       }else{
-        AppStyle.errorNotification(context, 'error', 'cannot_open_whatsapp');
+        // App.error_msg(context, 'can\'t open Whatsapp');
+        final Uri launchUri = Uri(
+          scheme: 'tel',
+          path: number,
+        );
+        await launchUrl(launchUri);
       }
     }else if(Platform.isIOS){
       // ignore: deprecated_member_use
@@ -22,18 +29,16 @@ class NotActivationController extends GetxController{
         // ignore: deprecated_member_use
         await launch("https://api.whatsapp.com/send?phone=$number=${Uri.parse(message)}");
       }else{
-        AppStyle.errorNotification(context, 'error', 'cannot_open_whatsapp');
+        // App.error_msg(context, 'can\'t open Whatsapp');
+        final Uri launchUri = Uri(
+          scheme: 'tel',
+          path: number,
+        );
+        await launchUrl(launchUri);
       }
     }
   }
 
-  phone() async {
-    String number = '0934481988';
-    final Uri launchUri = Uri(
-      scheme: 'tel',
-      path: number,
-    );
-    await launchUrl(launchUri);
-  }
+
 
 }

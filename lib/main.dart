@@ -13,7 +13,7 @@ import '../view/change_language.dart';
 import '../view/change_password.dart';
 import '../view/intro.dart';
 import '../view/login.dart';
-import '../view/selectio_menu.dart';
+import '../view/selection_menu.dart';
 import '../view/sign_up.dart';
 import '../view/welcome.dart';
 import '../view/main_page.dart';
@@ -110,7 +110,7 @@ class _MyAppState extends State<MyApp> {
           GetPage(
             name: '/mainPage',
             page: ()=> MainPage(),
-            transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 700), curve: Curves.fastOutSlowIn,
+            transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 1000), curve: Curves.fastOutSlowIn,
           ),
           GetPage(
             name: '/selectionMenu',
@@ -138,7 +138,7 @@ class _MyAppState extends State<MyApp> {
         theme: MyTheme.lightTheme,
         darkTheme: MyTheme.darkTheme,
         locale: _locale,
-        supportedLocales: [ Locale('ar', ''),Locale('en', '')],
+        supportedLocales: const [Locale('ar', ''),Locale('en', '')],
         localizationsDelegates: const [
           App_Localization.delegate,
           GlobalMaterialLocalizations.delegate,
