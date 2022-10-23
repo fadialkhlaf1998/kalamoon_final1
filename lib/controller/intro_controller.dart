@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:get/get.dart';
+import 'package:kalamoon_final/services/messages.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../view/no_internet_page.dart';
 import '../view/notActivatePage.dart';
@@ -98,7 +99,7 @@ class IntroController extends GetxController{
   }
 
   createAccount() async {
-    String message = "";
+    String message = Messages.createMessage;
     String number = '0934481988';
     if (Platform.isAndroid){
       // ignore: deprecated_member_use

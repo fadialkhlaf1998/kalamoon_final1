@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kalamoon_final/services/messages.dart';
 import '../services/app_style.dart';
 import '../services/global.dart';
 import '../view/notActivatePage.dart';
@@ -86,7 +87,7 @@ class LoginController extends GetxController{
 
 
   forgetPassword() async {
-    String message = "";
+    String message = Messages.forgetPassword;
     String number = '0934481988';
     if (Platform.isAndroid){
       // ignore: deprecated_member_use

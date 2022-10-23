@@ -33,13 +33,13 @@ class Home extends StatelessWidget {
       // homeController.goToSelectMode(context, 'station', 'selection2', introController.stationsList);
       Future.delayed(const Duration(milliseconds: 200)).then((value) {
         if(Global.langCode == "en"){
-          Get.toNamed('/selectionMenu',arguments: ['station', 'selection2', introController.stationsList])!.then((value) {
+          Get.offNamed('/selectionMenu',arguments: ['station', 'selection2', introController.stationsList])!.then((value) {
             if(loginController.studentDay[0].meet.isEmpty){
               checkStation();
             }
           });
         }else{
-          Get.toNamed('/selectionMenu',arguments: ['الموقف المعتمد', 'selection2', introController.stationsList])!.then((value) {
+          Get.offNamed('/selectionMenu',arguments: ['الموقف المعتمد', 'selection2', introController.stationsList])!.then((value) {
             if(loginController.studentDay[0].meet.isEmpty){
               checkStation();
             }

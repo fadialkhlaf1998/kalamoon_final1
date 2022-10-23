@@ -8,8 +8,8 @@ import 'package:url_launcher/url_launcher.dart';
 class ServicesController extends GetxController{
 
 
-  servicesRequest(String number) async {
-    String message = "";
+  servicesRequest(String number, String message) async {
+    // String message = "";
     if (Platform.isAndroid){
       // ignore: deprecated_member_use
       if(await canLaunch("https://wa.me/$number/?text=${Uri.parse(message)}")){

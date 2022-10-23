@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:kalamoon_final/app_localization.dart';
 import 'package:kalamoon_final/controller/services_controller.dart';
 import 'package:kalamoon_final/services/app_style.dart';
+import 'package:kalamoon_final/services/messages.dart';
+import 'package:kalamoon_final/services/user_info.dart';
 import 'package:kalamoon_final/widget/services_widget.dart';
 
 class ServicesPage extends StatelessWidget {
@@ -70,21 +72,21 @@ class ServicesPage extends StatelessWidget {
               height: 10,
               text: 'printing_service',
               onTap: (){
-                servicesController.servicesRequest('+963991031308');
+                servicesController.servicesRequest('+963991031308',Messages.printServices(UserInfo.name, UserInfo.studentId));
               }
           ),
           ServicesWidget(
               height: 10,
               text: 'bill_payment_service',
               onTap: (){
-                servicesController.servicesRequest('+963968304530');
+                servicesController.servicesRequest('+963968304530',Messages.payPillServices(UserInfo.name, UserInfo.studentId));
               }
           ),
           ServicesWidget(
               height: 10,
               text: 'exam_session_service',
               onTap: (){
-                servicesController.servicesRequest('+963934481988');
+                servicesController.servicesRequest('+963934481988',Messages.examSessionServices(UserInfo.name, UserInfo.studentId));
               }
           ),
         ],
