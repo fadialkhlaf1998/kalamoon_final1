@@ -88,7 +88,7 @@ class LoginController extends GetxController{
 
   forgetPassword() async {
     String message = Messages.forgetPassword;
-    String number = '0934481988';
+    String number = '+963934481988';
     if (Platform.isAndroid){
       // ignore: deprecated_member_use
       if(await canLaunch("https://wa.me/$number/?text=${Uri.parse(message)}")){
