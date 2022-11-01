@@ -35,7 +35,7 @@ class Settings extends StatelessWidget {
                       const SizedBox(height: 10),
                       _title(context),
                       _menu(context),
-                      const SizedBox(height: 20),
+                      // const SizedBox(height: 20),
                       settingsController.loading.value?
                           Container(
                             width: AppStyle.getDeviceWidth(90, context),
