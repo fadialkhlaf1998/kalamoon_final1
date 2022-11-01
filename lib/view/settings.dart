@@ -117,7 +117,7 @@ class Settings extends StatelessWidget {
   _menu(context){
     return Container(
       width: AppStyle.getDeviceWidth(90, context),
-      height: AppStyle.getDeviceHeight(70, context),
+      height: AppStyle.getDeviceHeight(60, context),
       // color: Colors.red,
       child: Column(
         children: [
