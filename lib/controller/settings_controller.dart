@@ -2,6 +2,9 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:kalamoon_final/app_localization.dart';
+import 'package:kalamoon_final/services/app_style.dart';
+import 'package:new_version/new_version.dart';
 import '../services/user_info.dart';
 import '../services/global.dart';
 import '../services/myTheme.dart';
@@ -18,11 +21,40 @@ class SettingsController extends GetxController{
   RxBool openDialogLogout = false.obs;
   RxBool stationLight = false.obs;
 
+  RxBool loading = false.obs;
+  RxBool updateLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     fillLanguageIndex();
+  }
+
+  updateApp(BuildContext context)async{
+    try{
+      updateLoading.value = true;
+      final newVersion = NewVersion(
+        iOSId: 'com.Fadi.Kalamoon',
+        androidId: 'com.fadi.kalamoon',
+      );
+      print(updateLoading.value);
+      final state = await newVersion.getVersionStatus();
+      updateLoading.value = true;
+
+      if(state !=null){
+        if(state.canUpdate){
+          newVersion.showUpdateDialog(context: context, versionStatus: state);
+        }else{
+          AppStyle.noteNotification(context,"update_app", "your_app_up_to_date");
+        }
+      }else{
+        print('null');
+      }
+    }catch(e){
+      print(e);
+      updateLoading.value = false;
+    }
+
   }
 
   fillLanguageIndex(){

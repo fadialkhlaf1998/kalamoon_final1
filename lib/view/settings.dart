@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:kalamoon_final/controller/intro_controller.dart';
+import 'package:kalamoon_final/services/api.dart';
+import 'package:kalamoon_final/widget/custom_button.dart';
 import '../widget/confirm_dialog.dart';
 import '../app_localization.dart';
 import '../services/app_style.dart';
@@ -30,19 +32,34 @@ class Settings extends StatelessWidget {
                       const SizedBox(height: 10),
                       _title(context),
                       _menu(context),
-                      const SizedBox(height: 40),
-                      // CustomButton(
-                      //     width: 90,
-                      //     height: 7,
-                      //     text: App_Localization.of(context).translate('delete_account'),
-                      //     onPressed: (){},
-                      //     color: AppStyle.red,
-                      //     color2: AppStyle.red,
-                      //     borderRadius: 10,
-                      //     borderColor: Colors.white,
-                      //     borderWidth: 0,
-                      //     border: false,
-                      //     textStyle: CommonTextStyle.textStyleForBigButton)
+                      const SizedBox(height: 20),
+                      settingsController.loading.value?
+                          Container(
+                            width: AppStyle.getDeviceWidth(90, context),
+                            height: AppStyle.getDeviceHeight(7, context),
+                            child: Center(
+                              child: LinearProgressIndicator(),
+                            ),
+                          )
+                          :
+                      CustomButton(
+                          width: 90,
+                          height: 7,
+                          text: App_Localization.of(context).translate('delete_account'),
+                          onPressed: ()async{
+                            settingsController.loading.value = true;
+                            await Api.deleteAccount();
+                            settingsController.loading.value = false;
+                            settingsController.logout();
+                          },
+                          color: AppStyle.red,
+                          color2: AppStyle.red,
+                          borderRadius: 10,
+                          borderColor: Colors.white,
+                          borderWidth: 0,
+                          border: false,
+                          textStyle: CommonTextStyle.textStyleForBigButton),
+                      const SizedBox(height: 10),
                     ],
                   ),
                 ),
@@ -105,6 +122,16 @@ class Settings extends StatelessWidget {
           _changePassword(context),
           _darkMode(context),
           _station(context),
+         Obx(() =>  settingsController.updateLoading.value?
+         Container(
+           width: AppStyle.getDeviceWidth(90, context),
+           height: AppStyle.getDeviceHeight(7, context),
+           child: Center(
+             child: LinearProgressIndicator(),
+           ),
+         )
+             :
+         _updateApp(context),),
           _logOut(context)
         ],
       )
@@ -307,7 +334,28 @@ class Settings extends StatelessWidget {
       ),
     );
   }
-
+  _updateApp(context){
+    return GestureDetector(
+      onTap: (){
+        print('-------------');
+        settingsController.updateApp(context);
+      },
+      child: Container(
+        color: Colors.transparent,
+        height: AppStyle.getDeviceHeight(heightItem, context),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              App_Localization.of(context).translate('update_app'),
+              style:CommonTextStyle.settingsTextStyle1(context),
+            ),
+            Icon(Icons.update,color: Theme.of(context).dividerColor)
+          ],
+        ),
+      ),
+    );
+  }
   _logOut(context){
     return GestureDetector(
       onTap: (){

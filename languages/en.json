@@ -97,7 +97,9 @@
 
   "note" : "Note",
   "change_station" : "You can change the station from here",
-  "id_number" : "ID number"
+  "id_number" : "ID number",
+  "update_app": "Update App",
+  "your_app_up_to_date": "Your App Is Up To Date"
 
 
 }

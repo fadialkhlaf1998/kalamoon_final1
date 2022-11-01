@@ -10,7 +10,8 @@ import '../model/user_model.dart';
 
 class Api{
 
-  static var url = "https://nabd.sy/api/";
+  // static var url = "https://nabd.sy/api/";
+  static var url = "https://nabd.alpha-yabroud.com/api/";
 
 
   static Future checkInternet() async {
@@ -306,5 +307,26 @@ class Api{
   }
 
 
+  static Future deleteAccount() async {
+    var headers = {
+      'Authorization': 'Bearer ${UserInfo.token}',
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request('DELETE', Uri.parse(url + 'student/delete-account'));
+    request.body = json.encode({
+      "id": UserInfo.id,
+    });
+    request.headers.addAll(headers);
 
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      return true;
+    }
+    else {
+      print(response.reasonPhrase);
+      return false;
+    }
+  }
 }
