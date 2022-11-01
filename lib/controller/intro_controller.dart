@@ -101,6 +101,8 @@ class IntroController extends GetxController{
   createAccount() async {
     String message = Messages.createMessage;
     String number = '+963934481988';
+    await launch("https://wa.me/$number/?text=${Uri.parse(message)}");
+    return;
     if (Platform.isAndroid){
       // ignore: deprecated_member_use
       if(await canLaunch("https://wa.me/$number/?text=${Uri.parse(message)}")){
