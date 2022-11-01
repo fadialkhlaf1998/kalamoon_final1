@@ -9,6 +9,8 @@ class ServicesController extends GetxController{
 
 
   servicesRequest(String number, String message) async {
+    await launch("https://wa.me/$number/?text=${Uri.parse(message)}");
+    return ;
     // String message = "";
     if (Platform.isAndroid){
       // ignore: deprecated_member_use
