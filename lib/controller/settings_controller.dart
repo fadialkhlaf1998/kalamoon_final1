@@ -32,24 +32,26 @@ class SettingsController extends GetxController{
 
   updateApp(BuildContext context)async{
     try{
-      updateLoading.value = true;
-      final newVersion = NewVersion(
-        iOSId: 'com.Fadi.Kalamoon',
-        androidId: 'com.fadi.kalamoon',
-      );
-      print(updateLoading.value);
-      final state = await newVersion.getVersionStatus();
-      updateLoading.value = true;
 
-      if(state !=null){
-        if(state.canUpdate){
-          newVersion.showUpdateDialog(context: context, versionStatus: state);
-        }else{
-          AppStyle.noteNotification(context,"update_app", "your_app_up_to_date");
-        }
-      }else{
-        print('null');
-      }
+
+      // updateLoading.value = true;
+      // final newVersion = NewVersion(
+      //   iOSId: 'com.Fadi.Kalamoon',
+      //   androidId: 'com.fadi.kalamoon',
+      // );
+      // print(updateLoading.value);
+      // final state = await newVersion.getVersionStatus();
+      // updateLoading.value = true;
+      //
+      // if(state !=null){
+      //   if(state.canUpdate){
+      //     newVersion.showUpdateDialog(context: context, versionStatus: state);
+      //   }else{
+      //     AppStyle.noteNotification(context,"update_app", "your_app_up_to_date");
+      //   }
+      // }else{
+      //   print('null');
+      // }
     }catch(e){
       print(e);
       updateLoading.value = false;

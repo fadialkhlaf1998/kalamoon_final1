@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:kalamoon_final/controller/intro_controller.dart';
 import 'package:kalamoon_final/services/api.dart';
 import 'package:kalamoon_final/widget/custom_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../widget/confirm_dialog.dart';
 import '../app_localization.dart';
 import '../services/app_style.dart';
@@ -336,9 +339,15 @@ class Settings extends StatelessWidget {
   }
   _updateApp(context){
     return GestureDetector(
-      onTap: (){
+      onTap: ()async{
         print('-------------');
-        settingsController.updateApp(context);
+        String url = "";
+        if(Platform.isAndroid){
+          url = "https://play.google.com/store/apps/details?id=com.fadi.kalamoon";
+        }else{
+          url = "https://apps.apple.com/app/id6443733286";
+        }
+        await launchUrl(Uri.parse(url));
       },
       child: Container(
         color: Colors.transparent,
