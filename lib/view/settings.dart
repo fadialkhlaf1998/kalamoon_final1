@@ -18,7 +18,7 @@ class Settings extends StatelessWidget {
 
   SettingsController settingsController = Get.find();
 
-  int heightItem = 10;
+  int heightItem = 7;
 
   @override
   Widget build(BuildContext context) {
