@@ -16,6 +16,7 @@ class Api{
 
 
   static Future checkInternet() async {
+    return true;
     try{
         var result = await Connectivity().checkConnectivity();
         if(result == ConnectivityResult.none){
