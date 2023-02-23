@@ -14,11 +14,14 @@ class Api{
   // static var url = "https://nabd.alpha-yabroud.com/api/";
   static var url = "http://ec2-44-203-19-125.compute-1.amazonaws.com:3000/api/";
 
-
-  static Future checkInternet() async {
+  static Future<bool> checkInternet() async {
     // return true;
-    var result = await Connectivity().checkConnectivity();
-    if(result == ConnectivityResult.mobile) {
+      var result = await Connectivity().checkConnectivity();
+    if(result == ConnectivityResult.none) {
+      print("No internet connection");
+      return false;
+    }
+    else if(result == ConnectivityResult.mobile) {
       return true;
     }else if(result == ConnectivityResult.wifi) {
       return true;
@@ -26,10 +29,8 @@ class Api{
       return true;
     }else if(result == ConnectivityResult.bluetooth){
       return true;
-    }
-    if(result == ConnectivityResult.none){
-      print("No internet connection");
-      return false;
+    }else{
+      return true;
     }
   }
 
