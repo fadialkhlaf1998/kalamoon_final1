@@ -16,26 +16,21 @@ class Api{
 
 
   static Future checkInternet() async {
-    return true;
-    try{
-        var result = await Connectivity().checkConnectivity();
-        if(result == ConnectivityResult.none){
+    // return true;
+    var result = await Connectivity().checkConnectivity();
+    if(result == ConnectivityResult.mobile) {
+      return true;
+    }else if(result == ConnectivityResult.wifi) {
+      return true;
+    }else if(result == ConnectivityResult.ethernet){
+      return true;
+    }else if(result == ConnectivityResult.bluetooth){
+      return true;
+    }
+    if(result == ConnectivityResult.none){
       print("No internet connection");
       return false;
     }
-    return true;
-    }catch(e){
-      return true;
-    }
-    // if(result == ConnectivityResult.mobile) {
-    //   return true;
-    // }else if(result == ConnectivityResult.wifi) {
-    //   return true;
-    // }else if(result == ConnectivityResult.ethernet){
-    //   return true;
-    // }else if(result == ConnectivityResult.bluetooth){
-    //   return true;
-    // }
   }
 
   static Future<User> login(String studentId, String password) async {
