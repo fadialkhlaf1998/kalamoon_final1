@@ -12,7 +12,8 @@ class Api{
 
   // static var url = "https://nabd.sy/api/";
   // static var url = "https://nabd.alpha-yabroud.com/api/";
-  static var url = "http://ec2-44-203-19-125.compute-1.amazonaws.com:3000/api/";
+  // static var url = "http://ec2-44-203-19-125.compute-1.amazonaws.com:3000/api/";
+  static var url = "http://18.207.169.231:3000/api/";
 
   static Future<bool> checkInternet() async {
     // return true;
